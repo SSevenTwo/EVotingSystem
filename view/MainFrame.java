@@ -5,10 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import controller.ToolBarVABtnListener;
-import controller.ToolbarVotingBtnListener;
 import model.EVotingSystem;
 
+@SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
 	private EVotingSystem voteSystem;

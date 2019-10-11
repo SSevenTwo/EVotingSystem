@@ -22,6 +22,12 @@ public class SetUpVoteSystemBtnListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		EVotingSystem system = mainFrame.getVoteSystem();
+		if(!(system.getCandidates().size()>1)) {
+			JOptionPane.showMessageDialog(mainFrame, "There must be more than 1 candidate.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
 		if (system.getNoOfVoters() != null && !system.getCandidates().isEmpty() && system.getKeyPair() != null) {
 			mainFrame.getVoteSystem().setUpVotingSystem();
 			mainFrame.getVotingAuthorityPanel().getButtons().disableButtons();

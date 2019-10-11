@@ -8,13 +8,12 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import controller.VoteBtnListener;
 import model.Candidate;
-
+@SuppressWarnings("serial")
 public class VotingButtons extends JPanel {
 
 	private JButton voteBtn;

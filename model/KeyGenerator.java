@@ -14,7 +14,6 @@ public class KeyGenerator {
 	private BigInteger k;
 	
 	private BigInteger meu; //   Private  Key  parameter  
-	private BigInteger r; // Random  Integer
 	
 	private SecureRandom randomGenerator;
 	

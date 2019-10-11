@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
-
+@SuppressWarnings("serial")
 public class VotingPanel extends JPanel{
 	
 	private VotingButtons votingButtons;

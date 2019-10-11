@@ -9,8 +9,6 @@ public class EVotingSystem {
 	private ArrayList<BigInteger> votes;
 	private Integer noOfCandidates;
 	private Integer noOfVoters;
-	private Integer maxNumberRepresentedBySingleVote;
-	private Integer maximumPossibleBinaryForSingleCandidate;
 	private String binaryRepresetntationOfMaxNo;
 	private BigInteger totalVotes;
 	private int lengthOfOneBinaryVote;
@@ -19,6 +17,8 @@ public class EVotingSystem {
 	private KeyGenerator keyPair;
 	private PublicKey publicKey;
 	private PrivateKey privateKey;
+	
+	private Voter[] voters;
 
 	public EVotingSystem() {
 		this.votes = new ArrayList<BigInteger>();
@@ -27,6 +27,11 @@ public class EVotingSystem {
 	
 	public void setNoOfVoters(Integer noOfVoters) {
 		this.noOfVoters = noOfVoters;
+		this.voters = new Voter[noOfVoters];
+		
+		for(int i = 0; i<noOfVoters; i++) {
+			voters[i] = new Voter();
+		}
 	}
 	
 	public void generateKey() {
@@ -162,7 +167,6 @@ public class EVotingSystem {
 	}
 
 	private void determineLengthOfOneBinaryVote() {
-		maxNumberRepresentedBySingleVote = noOfVoters;
 		binaryRepresetntationOfMaxNo = Integer.toBinaryString(noOfVoters);
 		lengthOfOneBinaryVote = binaryRepresetntationOfMaxNo.length();
 		System.out.println("Binary of Max Number: " + binaryRepresetntationOfMaxNo);
@@ -180,7 +184,6 @@ public class EVotingSystem {
 		for (int i = 0; i < length; i++) {
 			maxPossibleBinaryString += "0";
 		}
-		maximumPossibleBinaryForSingleCandidate = maxNumberRepresentedBySingleVote * noOfVoters;
 		System.out.println("MAX POSSIBLE BINARY STRING = " + maxPossibleBinaryString);
 	}
 
@@ -195,8 +198,10 @@ public class EVotingSystem {
 	public Integer getNoOfVoters() {
 		return noOfVoters;
 	}
-	
-	
+
+	public Voter[] getVoters() {
+		return voters;
+	}
 	
 	
 	
