@@ -25,6 +25,7 @@ public class EVotingSystem {
 		this.candidates = new ArrayList<Candidate>();
 	}
 	
+	// Set number of voters
 	public void setNoOfVoters(Integer noOfVoters) {
 		this.noOfVoters = noOfVoters;
 		this.voters = new Voter[noOfVoters];
@@ -34,17 +35,20 @@ public class EVotingSystem {
 		}
 	}
 	
+	// Generates public and private keys
 	public void generateKey() {
 		this.keyPair = new KeyGenerator();
 		this.privateKey = keyPair.getPrivateKey();
 		this.publicKey = keyPair.getPublicKey();
 	}
 	
+	// Add candidates
 	public void addCandidate(String name) {
 		candidates.add(new Candidate(name));
 		noOfCandidates = candidates.size();
 	}
 	
+	// Sets up the system for voters to use
 	public void setUpVotingSystem() {
 		System.out.println("Number of candidates: " + noOfCandidates);
 
@@ -60,6 +64,7 @@ public class EVotingSystem {
 		determineLargestBinaryPossible();
 	}
 
+	// Votes for a candidate
 	public void vote(Candidate candidate) {
 		StringBuilder voteBinary = determineUserBinaryVote(candidate.getID());
 
@@ -72,6 +77,7 @@ public class EVotingSystem {
 		System.out.println("Encrypted Vote= " + encryptedVote);
 	}
 	
+	// Converts the users vote to binary
 	private StringBuilder determineUserBinaryVote(int candidateNo) {
 		StringBuilder voteBinary = new StringBuilder("");
 
@@ -87,7 +93,8 @@ public class EVotingSystem {
 		
 		return voteBinary;
 	}
-
+	
+	// Adds up all the votes
 	public void totalVotes() {
 		homomorphicAdditionOfVotes();
 
@@ -101,6 +108,7 @@ public class EVotingSystem {
 		assignVotesToCandidate(binaryTally);
 	}
 
+	// Assigns the votes to the right candidate upon decryption
 	private void assignVotesToCandidate(String binaryTally) {
 		List<String> votes = getSubStrings(binaryTally, lengthOfOneBinaryVote);
 		int power = noOfCandidates - 1;
@@ -115,6 +123,7 @@ public class EVotingSystem {
 		}
 	}
 
+	//  Calculates the winner
 	public Candidate determineWinner() {
 		Candidate winner = candidates.get(0);
 		for (int i = 0; i < candidates.size(); i++) {
@@ -128,10 +137,12 @@ public class EVotingSystem {
 		return winner;
 	}
 
+	// Decrypts the total vote
 	private BigInteger decryptTally() {
 		return privateKey.decrypt(totalVotes);
 	}
 
+	// Adds the votes homomorphically
 	private void homomorphicAdditionOfVotes() {
 		totalVotes = new BigInteger("1");
 		for (BigInteger vote : votes) {
@@ -139,6 +150,7 @@ public class EVotingSystem {
 		}
 	}
 
+	// Converting the decrypted decimal tally to binary string
 	private String convertDecimalTallyToBinary(BigInteger decimalTally) {
 		int num = Integer.parseInt(decimalTally.toString());
 		String binaryTally = Integer.toBinaryString(num);
@@ -157,6 +169,7 @@ public class EVotingSystem {
 
 	}
 
+	// Substring maker
 	private List<String> getSubStrings(String string, int partitionSize) {
 		List<String> parts = new ArrayList<String>();
 		int len = string.length();

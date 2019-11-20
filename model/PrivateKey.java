@@ -15,6 +15,7 @@ public class PrivateKey {
 		this.nSquared = n.multiply(n);
 	}
 	
+	// Decrypts
 	public BigInteger decrypt(BigInteger c) {
 		BigInteger u = c.modPow(lambda, nSquared);
 		BigInteger a = calculateL(u);

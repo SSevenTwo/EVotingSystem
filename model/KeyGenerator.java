@@ -69,6 +69,7 @@ public class KeyGenerator {
 		privateKey = new PrivateKey(lambda,meu, n);
 	}
 	
+	// Calculates L(u)
 	private BigInteger calculateL(BigInteger u) {
 		BigInteger L1 = u.subtract(new BigInteger("1"));
 		return L1.divide(n);
